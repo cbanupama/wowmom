@@ -1,0 +1,139 @@
+[
+    {
+        "name": "id",
+        "dbType": "bigInteger,true,true",
+        "htmlType": null,
+        "validations": null,
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "imageable_type",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true
+    },
+    {
+        "name": "imageable_id",
+        "dbType": "bigInteger,false,true",
+        "htmlType": null,
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true
+    },
+    {
+        "name": "path",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true
+    },
+    {
+        "name": "type",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": null,
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true
+    },
+    {
+        "name": "created_at",
+        "dbType": "datetime",
+        "htmlType": "date",
+        "validations": null,
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "updated_at",
+        "dbType": "datetime",
+        "htmlType": "date",
+        "validations": null,
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,food_category_interest"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,food_category_language"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,food_category_post"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,food_category_super_category"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,food_category_tag"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,interest_language"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,interest_post"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,interest_super_category"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,language_post"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,language_super_categories"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,language_tag"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,post_super_category"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,post_tag"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,role_has_permissions"
+    },
+    {
+        "type": "relation",
+        "relation": "mtm,,super_category_tag"
+    }
+]
