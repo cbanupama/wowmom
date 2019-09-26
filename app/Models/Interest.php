@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Image;
+use App\User;
 use Eloquent as Model;
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -14,12 +15,12 @@ use Eloquent as Model;
  * @property \Illuminate\Database\Eloquent\Collection languages
  * @property \Illuminate\Database\Eloquent\Collection posts
  * @property \Illuminate\Database\Eloquent\Collection superCategories
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property string name
  * @property boolean active
  */
@@ -28,7 +29,7 @@ class Interest extends Model
 //    use SoftDeletes;
 
     public $table = 'interests';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -96,5 +97,10 @@ class Interest extends Model
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'interest_user');
     }
 }

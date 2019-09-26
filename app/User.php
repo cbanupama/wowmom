@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Models\Interest;
+use App\Models\Language;
+use App\Models\SuperCategory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -37,4 +40,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function interests()
+    {
+        return $this->belongsToMany(Interest::class, 'interest_user');
+    }
+
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class, 'language_user');
+    }
+
+    public function superCategories()
+    {
+        return $this->belongsToMany(SuperCategory::class, 'super_category_user');
+    }
 }

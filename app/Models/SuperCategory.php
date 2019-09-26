@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Image;
+use App\User;
 use Eloquent as Model;
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -11,14 +12,14 @@ use Eloquent as Model;
  * @package App\Models
  * @version August 24, 2019, 6:49 am UTC
  *
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property \Illuminate\Database\Eloquent\Collection interests
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property \Illuminate\Database\Eloquent\Collection posts
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property \Illuminate\Database\Eloquent\Collection tags
  * @property string name
  * @property boolean active
@@ -28,7 +29,7 @@ class SuperCategory extends Model
 //    use SoftDeletes;
 
     public $table = 'super_categories';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -108,5 +109,10 @@ class SuperCategory extends Model
     public function images()
     {
         return $this->morphMany(Image::class, 'imageable');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'super_category_user');
     }
 }

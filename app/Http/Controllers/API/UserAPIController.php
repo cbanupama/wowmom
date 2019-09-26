@@ -10,13 +10,13 @@ use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Laravel\Socialite\Facades\Socialite;
 use Response;
 
 /**
  * Class UserController
  * @package App\Http\Controllers\API
  */
-
 class UserAPIController extends AppBaseController
 {
     /** @var  UserRepository */
@@ -113,9 +113,9 @@ class UserAPIController extends AppBaseController
      *
      * @param int $id
      *
+     * @return Response
      * @throws \Exception
      *
-     * @return Response
      */
     public function destroy($id)
     {
@@ -133,38 +133,37 @@ class UserAPIController extends AppBaseController
 
     public function onBoard(Request $request)
     {
+        $googleAuthCode = $request->get( 'googleAuthCode' );
+        $accessTokenResponse= Socialite::driver('google')->getAccessTokenResponse($googleAuthCode);
+        $accessToken=$accessTokenResponse["access_token"];
+        $expiresIn=$accessTokenResponse["expires_in"];
+        $idToken=$accessTokenResponse["id_token"];
+        $refreshToken=isset($accessTokenResponse["refresh_token"])?$accessTokenResponse["refresh_token"]:"";
+        $tokenType=$accessTokenResponse["token_type"];
+        $user = Socialite::driver('google')->userFromToken($accessToken);
+
         $user = \App\User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email')
+            'name'  => $user->getName(),
+            'email' => $user->getEmail()
         ]);
 
         $profile = Profile::create([
-            'user_id' => $user->id,
-            'phone' => $request->get('phone'),
-            'photo' => $request->get('photo'),
-            'date_of_birth' => $request->get('date_of_birth'),
+            'user_id'           => $user->id,
+            'phone'             => $request->get('phone'),
+            'photo'             => $request->get('photo'),
+            'date_of_birth'     => $request->get('date_of_birth'),
             'kid_date_of_birth' => $request->get('kid_date_of_birth'),
-            'due_date' => $request->get('kid_date_of_birth'),
-            'last_period_date' => $request->get('kid_date_of_birth'),
-            'gender' => $request->get('gender')
-        ]);
-
-        $language_user = Language::create([
-            'user_id' => $user->id,
-            'name' => $request->get('name'),
-            'iso2' => $request->get('iso2'),
-
-        ]);
-
-        $super_category_user = Language::create([
-            'user_id' => $user->id,
-            'name' => $request->get('name'),
+            'due_date'          => $request->get('kid_date_of_birth'),
+            'last_period_date'  => $request->get('kid_date_of_birth'),
+            'gender'            => $request->get('gender')
         ]);
 
         // language_user
         // super_category_user
         $user->interests()->sync($request->get('interest_id'));
+        $user->languages()->sync($request->get('language_id'));
+        $user->superCategories()->sync($request->get('super_category_id'));
 
-        return response()->json($user, $profile, $super_category_user, $language_user);
+        return response()->json($user);
     }
 }

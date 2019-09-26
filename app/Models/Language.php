@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\User;
 use Eloquent as Model;
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -11,14 +12,14 @@ use Eloquent as Model;
  * @version August 24, 2019, 6:47 am UTC
  *
  * @property \Illuminate\Database\Eloquent\Collection interests
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property \Illuminate\Database\Eloquent\Collection posts
  * @property \Illuminate\Database\Eloquent\Collection tags
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
- * @property \Illuminate\Database\Eloquent\Collection 
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
+ * @property \Illuminate\Database\Eloquent\Collection
  * @property string name
  * @property string iso2
  * @property boolean active
@@ -28,7 +29,7 @@ class Language extends Model
 //    use SoftDeletes;
 
     public $table = 'languages';
-    
+
     const CREATED_AT = 'created_at';
     const UPDATED_AT = 'updated_at';
 
@@ -95,5 +96,10 @@ class Language extends Model
     public function superCategories()
     {
         return $this->belongsToMany(\App\Models\SuperCategory::class, 'super_category_tag');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'language_user');
     }
 }
