@@ -38,11 +38,3 @@ Route::get('posts/filter-by-super-category/{id}', 'PostAPIController@filterBySup
 Route::resource('images', 'ImageAPIController');
 
 Route::resource('profiles', 'ProfileAPIController');
-
-Route::resource('users', 'UserAPIController');
-
-Route::resource('$_users', '$UserAPIController');
-
-Route::resource('users', 'UserAPIController');
-
-Route::resource('users', 'UserAPIController');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
+use App\Models\Language;
 use App\Models\Profile;
 use App\Models\User;
 use App\Repositories\UserRepository;
@@ -139,13 +140,31 @@ class UserAPIController extends AppBaseController
 
         $profile = Profile::create([
             'user_id' => $user->id,
-            'phone' => $request->get('phone')
+            'phone' => $request->get('phone'),
+            'photo' => $request->get('photo'),
+            'date_of_birth' => $request->get('date_of_birth'),
+            'kid_date_of_birth' => $request->get('kid_date_of_birth'),
+            'due_date' => $request->get('kid_date_of_birth'),
+            'last_period_date' => $request->get('kid_date_of_birth'),
+            'gender' => $request->get('gender')
+        ]);
+
+        $language_user = Language::create([
+            'user_id' => $user->id,
+            'name' => $request->get('name'),
+            'iso2' => $request->get('iso2'),
+
+        ]);
+
+        $super_category_user = Language::create([
+            'user_id' => $user->id,
+            'name' => $request->get('name'),
         ]);
 
         // language_user
         // super_category_user
         $user->interests()->sync($request->get('interest_id'));
 
-        return response()->json($user);
+        return response()->json($user, $profile, $super_category_user, $language_user);
     }
 }
