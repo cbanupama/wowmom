@@ -19,7 +19,8 @@
         "laravel/socialite": "^4.1",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.8.0",
-        "spatie/laravel-permission": "^2.37"
+        "spatie/laravel-permission": "^2.37",
+      "ext-json": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

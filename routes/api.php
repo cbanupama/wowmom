@@ -15,7 +15,6 @@ use Illuminate\Http\Request;
 
 Route::post('g-login', 'LoginAPIController@loginWithAPI');
 Route::post('onboard-user', 'API/UserAPIController@onBoard');
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
