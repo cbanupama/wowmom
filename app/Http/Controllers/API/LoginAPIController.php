@@ -12,16 +12,16 @@ class LoginAPIController extends Controller
 {
     public function Login(Request $request)
     {
-//        $user = User::create($request->all());
-        $googleAuthCode = $request->input( 'googleAuthCode' );
-        $accessTokenResponse= Socialite::driver('google')->getAccessTokenResponse($googleAuthCode);
-        $accessToken=$accessTokenResponse["access_token"];
-        $expiresIn=$accessTokenResponse["expires_in"];
-        $idToken=$accessTokenResponse["id_token"];
-        $refreshToken=isset($accessTokenResponse["refresh_token"])?$accessTokenResponse["refresh_token"]:"";
-        $tokenType=$accessTokenResponse["token_type"];
-        $user = Socialite::driver('google')->userFromToken($accessToken);
-        
+        $user = User::create($request->all());
+//        $googleAuthCode = $request->input( 'googleAuthCode' );
+//        $accessTokenResponse= Socialite::driver('google')->getAccessTokenResponse($googleAuthCode);
+//        $accessToken=$accessTokenResponse["access_token"];
+//        $expiresIn=$accessTokenResponse["expires_in"];
+//        $idToken=$accessTokenResponse["id_token"];
+//        $refreshToken=isset($accessTokenResponse["refresh_token"])?$accessTokenResponse["refresh_token"]:"";
+//        $tokenType=$accessTokenResponse["token_type"];
+//        $user = Socialite::driver('google')->userFromToken($accessToken);
+
         return $user;
     }
 

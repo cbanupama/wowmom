@@ -20,7 +20,14 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','language_id','interest_id','tag_id', 'super_category_id', 'food_category_id'
+        'name',
+        'email',
+        'password',
+//        'language_id',
+//        'interest_id',
+//        'tag_id',
+//        'super_category_id',
+//        'food_category_id'
     ];
 
     /**
@@ -41,6 +48,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+<<<<<<< HEAD
     public function interests()
     {
         return $this->belongsToMany(Interest::class, 'interest_user');
@@ -55,4 +63,38 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(SuperCategory::class, 'super_category_user');
     }
+=======
+    public $with = [
+//        'profile',
+//        'language',
+//        'interest',
+//        'tag',
+//        'super_category',
+//        'food_category'
+    ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+//    public function profile()
+//    {
+//        return $this->hasMany(\App\Models\Profile::class, 'user_id');
+//    }
+//    public function language()
+//    {
+//        return $this->hasMany(\App\Models\Language::class, 'user_id');
+//    }
+//    public function superCategory()
+//    {
+//        return $this->hasMany(\App\Models\SuperCategory::class, 'user_id');
+//    }
+//    public function foodCategory()
+//    {
+//        return $this->hasMany(\App\Models\FoodCategory::class, 'user_id');
+//    }
+//    public function tag()
+//    {
+//        return $this->hasMany(\App\Models\Tag::class, 'user_id');
+//    }
+>>>>>>> 6b6913f033859ea86153292ddcceac4904c7ae25
 }
