@@ -97,4 +97,9 @@ class Interest extends Model
     {
         return $this->morphMany(Image::class, 'imageable');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(\App\Models\User::class, 'interest_user');
+    }
 }

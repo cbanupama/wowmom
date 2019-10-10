@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Http\Requests\CreateUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Models\User;
 use App\Repositories\UserRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use Flash;
-use Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+use Laracasts\Flash\Flash;
 
 class UserController extends AppBaseController
 {
@@ -20,6 +22,55 @@ class UserController extends AppBaseController
         $this->userRepository = $userRepo;
     }
 
+    public $successStatus = 200;
+    /**
+     * login api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function login(){
+        if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('MyApp')-> accessToken;
+            return response()->json(['success' => $success], $this-> successStatus);
+        }
+        else{
+            return response()->json(['error'=>'Unauthorised'], 401);
+        }
+    }
+    /**
+     * Register api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required',
+            'password_confirmation' => 'required|same:password',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['error'=>$validator->errors()], 401);
+        }
+        $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
+        $user = User::create($input);
+        $success['token'] =  $user->createToken('MyApp')-> accessToken;
+        $success['name'] =  $user->name;
+        return response()->json(['success'=>$success], $this-> successStatus);
+    }
+    /**
+     * details api
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function details()
+    {
+        $user = Auth::user();
+        return response()->json(['success' => $user], $this-> successStatus);
+    }
     /**
      * Display a listing of the User.
      *
@@ -153,4 +204,6 @@ class UserController extends AppBaseController
 
         return redirect(route('users.index'));
     }
+
+
 }

@@ -1,15 +1,16 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasRoles,Notifiable;
+    use HasRoles,Notifiable,HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -57,24 +58,28 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-//    public function profile()
-//    {
-//        return $this->hasMany(\App\Models\Profile::class, 'user_id');
-//    }
-//    public function language()
-//    {
-//        return $this->hasMany(\App\Models\Language::class, 'user_id');
-//    }
-//    public function superCategory()
-//    {
-//        return $this->hasMany(\App\Models\SuperCategory::class, 'user_id');
-//    }
-//    public function foodCategory()
-//    {
-//        return $this->hasMany(\App\Models\FoodCategory::class, 'user_id');
-//    }
-//    public function tag()
-//    {
-//        return $this->hasMany(\App\Models\Tag::class, 'user_id');
-//    }
+    public function profile()
+    {
+        return $this->hasOne(\App\Models\Profile::class, 'user_id');
+    }
+    public function languages()
+    {
+        return $this->belongsToMany(\App\Models\Language::class, 'language_user');
+    }
+    public function superCategories()
+    {
+        return $this->belongsToMany(\App\Models\SuperCategory::class, 'super_category_user');
+    }
+    public function foodCategories()
+    {
+        return $this->belongsToMany(\App\Models\FoodCategory::class, 'food_category_user');
+    }
+    public function tags()
+    {
+        return $this->belongsToMany(\App\Models\Tag::class, 'tag_user');
+    }
+    public function interests()
+    {
+        return $this->belongsToMany(\App\Models\Interest::class, 'interest_user');
+    }
 }

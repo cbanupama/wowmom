@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +21,6 @@ class LoginAPIController extends Controller
 //        $refreshToken=isset($accessTokenResponse["refresh_token"])?$accessTokenResponse["refresh_token"]:"";
 //        $tokenType=$accessTokenResponse["token_type"];
 //        $user = Socialite::driver('google')->userFromToken($accessToken);
-
         return $user;
     }
 
@@ -43,6 +42,7 @@ class LoginAPIController extends Controller
     public function handleProviderCallback()
     {
         $gUser = Socialite::driver('google')->stateless()->user();
+        dd($gUser->token);
         $this->validateAndLogin($gUser);
 
         return redirect()->to('/home');
@@ -74,6 +74,7 @@ class LoginAPIController extends Controller
             // use existing user credentials and login via passport
         }
 
-        return $user;
+        Auth::loginUsingId($user->id);
+//        return $user;
     }
 }

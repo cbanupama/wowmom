@@ -4,12 +4,15 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Requests\API\CreateUserAPIRequest;
 use App\Http\Requests\API\UpdateUserAPIRequest;
+use App\Http\Requests\API\UserLoginRequest;
 use App\Models\Language;
 use App\Models\Profile;
 use App\Models\User;
 use App\Repositories\UserRepository;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use Laravel\Socialite\Facades\Socialite;
 use Response;
 
 /**
@@ -27,6 +30,30 @@ class UserAPIController extends AppBaseController
         $this->userRepository = $userRepo;
     }
 
+    public function login(UserLoginRequest $request)
+    {
+        $http = new Client();
+        $appUrl = config('app.url') . '/oauth/token';
+
+        $user = User::where('employee_id', $request->get('employee_id'))->first();
+
+        $response = $http->post($appUrl, [
+            'form_params' => [
+                'grant_type'    => 'password',
+                'client_id'     => config('passport.client_id'),
+                'client_secret' => config('passport.client_secret'),
+                'username'      => $user->email,
+                'password'      => $request->get('password'),
+                'scope'         => '',
+            ],
+        ]);
+
+        $data = json_decode((string)$response->getBody(), true);
+        $data['user_id'] = $user->id;
+        $data['can_edit'] = $user->can_edit;
+
+        return $this->sendResponse($data, 'Logged in successfully');
+    }
     /**
      * Display a listing of the User.
      * GET|HEAD /users
@@ -133,38 +160,64 @@ class UserAPIController extends AppBaseController
 
     public function onBoard(Request $request)
     {
-        $user = \App\User::create([
-            'name' => $request->get('name'),
-            'email' => $request->get('email')
-        ]);
+        $googleAuthCode = $request->get( 'googleAuthCode' );
+//        $accessTokenResponse= Socialite::driver('google')->getAccessTokenResponse($googleAuthCode);
+//        $accessToken=$accessTokenResponse["access_token"];
+//        $expiresIn=$accessTokenResponse["expires_in"];
+//        $idToken=$accessTokenResponse["id_token"];
+//        $refreshToken=isset($accessTokenResponse["refresh_token"])?$accessTokenResponse["refresh_token"]:"";
+//        $tokenType=$accessTokenResponse["token_type"];
+        $user = Socialite::driver('google')->userFromToken($googleAuthCode);
 
-        $profile = Profile::create([
-            'user_id' => $user->id,
+        $existingUser = User::where('email', $user->getEmail())->first();
+//        dd($existingUser, $user->getEmail());
+        if($existingUser) {
+            $user = User::where('email', $user->getEmail())->first();
+        } else {
+            $user = User::create([
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'password' => bcrypt('wowmom')
+            ]);
+        }
+
+        $profile = Profile::updateOrCreate(['user_id' => $user->id],
+            [
             'phone' => $request->get('phone'),
             'photo' => $request->get('photo'),
             'date_of_birth' => $request->get('date_of_birth'),
             'kid_date_of_birth' => $request->get('kid_date_of_birth'),
-            'due_date' => $request->get('kid_date_of_birth'),
-            'last_period_date' => $request->get('kid_date_of_birth'),
+            'due_date' => $request->get('due_date'),
+            'last_period_date' => $request->get('last_period_date'),
             'gender' => $request->get('gender')
         ]);
 
-        $language_user = Language::create([
-            'user_id' => $user->id,
-            'name' => $request->get('name'),
-            'iso2' => $request->get('iso2'),
-
-        ]);
-
-        $super_category_user = Language::create([
-            'user_id' => $user->id,
-            'name' => $request->get('name'),
-        ]);
-
-        // language_user
-        // super_category_user
+// language_user
+// super_category_user
         $user->interests()->sync($request->get('interest_id'));
+//        $user->languages()->sync($request->get('language_id'));
+//        $user->superCategories()->sync($request->get('super_category_id'));
 
-        return response()->json($user, $profile, $super_category_user, $language_user);
+        return response()->json($user);
+    }
+
+    public function onBoardAndroid(Request $request) {
+        $user = User::create([
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'password' => bcrypt('wowmom'),
+        ]);
+        $user = Profile::updateOrCreate(['user_id' => $user->id],
+            [
+            'phone' => $request->get('phone'),
+            'photo' => $request->get('photo'),
+            'date_of_birth' => $request->get('date_of_birth'),
+            'kid_date_of_birth' => $request->get('kid_date_of_birth'),
+            'due_date' => $request->get('due_date'),
+            'last_period_date' => $request->get('last_period_date'),
+            'gender' => $request->get('gender')
+        ]);
+
+        return response()->json($user);
     }
 }

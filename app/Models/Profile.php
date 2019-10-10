@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Eloquent as Model;
 //use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -33,6 +34,7 @@ use Eloquent as Model;
  * @property string phone
  * @property string photo
  * @property string gender
+ * @property  attributes
  */
 class Profile extends Model
 {
@@ -96,4 +98,45 @@ class Profile extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
+
+    public function getDateOfBirthAttribute($value)
+    {
+        return $value === null ? null : Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function setDateOfBirthAttribute($value)
+    {
+        $this->attributes['date_of_birth'] = Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function getKidDateOfBirthAttribute($value)
+    {
+        return $value === null ? null : Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function setKidDateOfBirthAttribute($value)
+    {
+        $this->attributes['kid_date_of_birth'] = Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function getLastPeriodDateAttribute($value)
+    {
+        return $value === null ? null : Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function setLastPeriodDateAttribute($value)
+    {
+        $this->attributes['last_period_date'] = Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function getDueDateAttribute($value)
+    {
+        return $value === null ? null : Carbon::parse($value)->format('Y-m-d');
+    }
+
+    public function setDueDateAttribute($value)
+    {
+        $this->attributes['due_date'] = Carbon::parse($value)->format('Y-m-d');
+    }
+
 }

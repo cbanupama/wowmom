@@ -39,5 +39,3 @@ Route::resource('images', 'ImageController');
 Route::resource('profiles', 'ProfileController');
 
 Route::resource('users', 'UserController');
-
-Route::resource('users', 'UserController');
