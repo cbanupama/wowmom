@@ -2,6 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d8a8be1-29a8-4e4f-bdaf-bd8e93ea0ede" name="Default Changelist" comment="">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+      <change afterPath="$PROJECT_DIR$/app/Helpers/FirebaseCloudMessenger.php" afterDir="false" />
+>>>>>>> 4c48a9ae165410a179d82cb55e8a476b162ad9f4
       <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/wowmom.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/wowmom.iml" afterDir="false" />
@@ -23,7 +30,11 @@
       <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/passwords/reset.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+=======
+>>>>>>> 6b6913f033859ea86153292ddcceac4904c7ae25
+>>>>>>> 4c48a9ae165410a179d82cb55e8a476b162ad9f4
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,6 +48,8 @@
       <executable />
     </execution>
   </component>
+<<<<<<< HEAD
+=======
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
@@ -149,6 +162,7 @@
       </file>
     </leaf>
   </component>
+>>>>>>> 6b6913f033859ea86153292ddcceac4904c7ae25
   <component name="FindInProjectRecents">
     <findStrings>
       <find>food_super_categories</find>
@@ -161,6 +175,8 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+<<<<<<< HEAD
+=======
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
@@ -218,6 +234,7 @@
       </list>
     </option>
   </component>
+>>>>>>> 6b6913f033859ea86153292ddcceac4904c7ae25
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/vlucas/phpdotenv" />
@@ -341,7 +358,14 @@
     <option name="width" value="1382" />
     <option name="height" value="784" />
   </component>
+  <component name="ProjectId" id="1RMbY9uLpibBo6HvzpAzzvwI3hf" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+<<<<<<< HEAD
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -431,7 +455,12 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/vendor" />
+>>>>>>> 6b6913f033859ea86153292ddcceac4904c7ae25
+>>>>>>> 4c48a9ae165410a179d82cb55e8a476b162ad9f4
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -505,6 +534,26 @@
       <workItem from="1569328029474" duration="1025000" />
       <workItem from="1569405750883" duration="9433000" />
       <workItem from="1569426177295" duration="4047000" />
+<<<<<<< HEAD
+      <workItem from="1569469476160" duration="6182000" />
+      <workItem from="1569479958395" duration="1779000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+=======
       <workItem from="1569469476160" duration="15253000" />
       <workItem from="1569555573012" duration="1332000" />
       <workItem from="1569577107484" duration="5319000" />
@@ -935,6 +984,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/routes/api.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="137">
@@ -949,5 +999,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 6b6913f033859ea86153292ddcceac4904c7ae25
+>>>>>>> 4c48a9ae165410a179d82cb55e8a476b162ad9f4
   </component>
 </project>

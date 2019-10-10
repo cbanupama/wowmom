@@ -19,7 +19,6 @@ use Response;
  * Class UserController
  * @package App\Http\Controllers\API
  */
-
 class UserAPIController extends AppBaseController
 {
     /** @var  UserRepository */
@@ -140,9 +139,9 @@ class UserAPIController extends AppBaseController
      *
      * @param int $id
      *
+     * @return Response
      * @throws \Exception
      *
-     * @return Response
      */
     public function destroy($id)
     {
@@ -161,6 +160,7 @@ class UserAPIController extends AppBaseController
     public function onBoard(Request $request)
     {
         $googleAuthCode = $request->get( 'googleAuthCode' );
+<<<<<<< HEAD
 //        $accessTokenResponse= Socialite::driver('google')->getAccessTokenResponse($googleAuthCode);
 //        $accessToken=$accessTokenResponse["access_token"];
 //        $expiresIn=$accessTokenResponse["expires_in"];
@@ -218,6 +218,38 @@ class UserAPIController extends AppBaseController
             'gender' => $request->get('gender')
         ]);
 
+=======
+        $accessTokenResponse= Socialite::driver('google')->getAccessTokenResponse($googleAuthCode);
+        $accessToken=$accessTokenResponse["access_token"];
+        $expiresIn=$accessTokenResponse["expires_in"];
+        $idToken=$accessTokenResponse["id_token"];
+        $refreshToken=isset($accessTokenResponse["refresh_token"])?$accessTokenResponse["refresh_token"]:"";
+        $tokenType=$accessTokenResponse["token_type"];
+        $user = Socialite::driver('google')->userFromToken($accessToken);
+
+        $user = \App\User::create([
+            'name'  => $user->getName(),
+            'email' => $user->getEmail()
+        ]);
+
+        $profile = Profile::create([
+            'user_id'           => $user->id,
+            'phone'             => $request->get('phone'),
+            'photo'             => $request->get('photo'),
+            'date_of_birth'     => $request->get('date_of_birth'),
+            'kid_date_of_birth' => $request->get('kid_date_of_birth'),
+            'due_date'          => $request->get('kid_date_of_birth'),
+            'last_period_date'  => $request->get('kid_date_of_birth'),
+            'gender'            => $request->get('gender')
+        ]);
+
+        // language_user
+        // super_category_user
+        $user->interests()->sync($request->get('interest_id'));
+        $user->languages()->sync($request->get('language_id'));
+        $user->superCategories()->sync($request->get('super_category_id'));
+
+>>>>>>> 4c48a9ae165410a179d82cb55e8a476b162ad9f4
         return response()->json($user);
     }
 }

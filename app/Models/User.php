@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Interest;
+use App\Models\Language;
+use App\Models\SuperCategory;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -46,6 +49,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+<<<<<<< HEAD
+    public function interests()
+    {
+        return $this->belongsToMany(Interest::class, 'interest_user');
+    }
+
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class, 'language_user');
+    }
+
+    public function superCategories()
+    {
+        return $this->belongsToMany(SuperCategory::class, 'super_category_user');
+    }
+=======
     public $with = [
 //        'profile',
 //        'language',
@@ -58,6 +77,7 @@ class User extends Authenticatable
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
+<<<<<<< HEAD:app/Models/User.php
     public function profile()
     {
         return $this->hasOne(\App\Models\Profile::class, 'user_id');
@@ -82,4 +102,27 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(\App\Models\Interest::class, 'interest_user');
     }
+=======
+//    public function profile()
+//    {
+//        return $this->hasMany(\App\Models\Profile::class, 'user_id');
+//    }
+//    public function language()
+//    {
+//        return $this->hasMany(\App\Models\Language::class, 'user_id');
+//    }
+//    public function superCategory()
+//    {
+//        return $this->hasMany(\App\Models\SuperCategory::class, 'user_id');
+//    }
+//    public function foodCategory()
+//    {
+//        return $this->hasMany(\App\Models\FoodCategory::class, 'user_id');
+//    }
+//    public function tag()
+//    {
+//        return $this->hasMany(\App\Models\Tag::class, 'user_id');
+//    }
+>>>>>>> 6b6913f033859ea86153292ddcceac4904c7ae25
+>>>>>>> 4c48a9ae165410a179d82cb55e8a476b162ad9f4:app/User.php
 }

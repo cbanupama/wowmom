@@ -29,6 +29,22 @@ class CreateLanguageUserTable extends Migration
                     ->on('languages')
                     ->onDelete('cascade');
         });
+
+        Schema::create('interest_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('interest_id');
+            $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('interest_id')
+                ->references('id')
+                ->on('interests')
+                ->onDelete('cascade');
+        });
     }
 
     /**
@@ -41,6 +57,7 @@ class CreateLanguageUserTable extends Migration
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('language_user');
+        Schema::dropIfExists('interest_user');
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }
